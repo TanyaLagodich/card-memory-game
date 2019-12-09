@@ -17,16 +17,17 @@
   perspective: 1000;
   &.flip {
     .front {
-      transform: rotateY(180deg);
+      transform: rotateY(360deg);
     }
     .back {
-      transform: rotateY(350deg);
+      transform: rotateY(180deg);
     }
   }
   i {
     display: block;
     text-align: center;
     font-size: 50px;
+    transform: rotateX(180deg);
   }
   .front, .back {
     position: absolute;
@@ -38,11 +39,14 @@
     transition: 1s;
   }
   .front {
-    z-index: 2;
     background-color: #ffffff;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .back {
-    transform: rotateY(180deg);
+    transform: rotateY(360deg);
     background-color: #BDBDBD;
   }
 }
