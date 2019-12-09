@@ -21,8 +21,8 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: [
-          'ts-loader',
           'babel-loader',
+          'ts-loader'
         ],
         exclude: /node_modules/,
       },
@@ -36,6 +36,12 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader',
+        ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           'file-loader',
         ],
