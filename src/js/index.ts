@@ -1,13 +1,18 @@
-import './style/main.scss';
+import '../style/main.scss';
+import { Card } from './_typings/entity';
+import CardsDeck from './CardDeck';
 
-const cards: Array<string> = ['fa-cat', 'fa-crow', 'fa-dog', 'fa-dove', 'fa-dragon', 'fa-fish', 'fa-cat', 'fa-crow', 'fa-dog', 'fa-dove', 'fa-dragon', 'fa-fish'];
 
 class Game {
-  cards: Array<string>;
+  cards: Array<Card>
   start: number;
+  end: number;
+  openCards: [HTMLElement, HTMLElement];
+  selectedFirstCardIndex: number;
+  selectedSecondCardIndex: number;
 
-  constructor(cards: Array<string>) {
-    this.cards = cards;
+  constructor() {
+    this.cards = CardsDeck.shuffleDeck();
     this.createCards();
     this.eventHandler();
   }
@@ -15,7 +20,7 @@ class Game {
   createCards(): void {
     const wrapper: HTMLElement = document.createElement('div');
     wrapper.classList.add('cards');
-    this.cards.forEach(card => {
+    this.cards.forEach((card, cardIndex) => {
   
       const div: HTMLDivElement = document.createElement('div');
       const front: HTMLDivElement = document.createElement('div');
@@ -23,9 +28,10 @@ class Game {
       const icon: HTMLElement = document.createElement('i');
   
       div.classList.add('card');
+      div.setAttribute('id', `${cardIndex}`);
       front.classList.add('front');
       back.classList.add('back');
-      icon.className = `fas ${card}`;
+      icon.className = `fas ${card.symbol}`;
   
       div.append(front, back);
       front.append(icon);
@@ -41,7 +47,7 @@ class Game {
 
     if (startBtn) startBtn.addEventListener('click', this.startGame)
     cards.forEach((card) => {
-      card.addEventListener('click', ({ target }: { target: EventTarget }) => this._togleClass(target))
+      card.addEventListener('click', ({ target }: { target: EventTarget }) => this._openCard(target))
     })
   };
 
@@ -49,10 +55,10 @@ class Game {
     this.start = +new Date();
   };
 
-  _togleClass(target: EventTarget): void {
+  _openCard(target: EventTarget): void {
     const elem: Element = (<HTMLElement>target).classList.contains('card') ? <HTMLElement>target : (<HTMLElement>target).closest('.card');
     if (elem) {
-      elem.classList.toggle('flip');
+      elem.classList.add('flip');
     }
   };
 
@@ -63,5 +69,5 @@ class Game {
 
 }
 
-new Game(cards);
+new Game();
 
