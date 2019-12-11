@@ -7,9 +7,9 @@ class Game {
   cards: Array<Card>
   start: number;
   end: number;
-  openCards: [HTMLElement, HTMLElement];
-  selectedFirstCardIndex: number;
-  selectedSecondCardIndex: number;
+  firstCardId: number | null
+  secondCardId: number | null
+  flipCard: number = 0
 
   constructor() {
     this.cards = CardsDeck.shuffleDeck();
@@ -47,7 +47,10 @@ class Game {
 
     if (startBtn) startBtn.addEventListener('click', this.startGame)
     cards.forEach((card) => {
-      card.addEventListener('click', ({ target }: { target: EventTarget }) => this._openCard(target))
+      card.addEventListener('click', ({ target }: { target: EventTarget }) => {
+        const element: Element = (<HTMLElement>target).classList.contains('.card') ? <HTMLElement>target : (<HTMLElement>target).closest('.card');
+        this._turnCard(element.getAttribute('id'));
+      })
     })
   };
 
@@ -55,19 +58,42 @@ class Game {
     this.start = +new Date();
   };
 
-  _openCard(target: EventTarget): void {
-    const elem: Element = (<HTMLElement>target).classList.contains('card') ? <HTMLElement>target : (<HTMLElement>target).closest('.card');
-    if (elem) {
-      elem.classList.add('flip');
+  updateGame(): void {
+    if (this.flipCard === 2) {
+      const res = this.isMatchedCards()
+      console.log(res)
     }
   };
 
+  isMatchedCards(): boolean {
+    console.log(this.firstCardId, !this.secondCardId)
+    if (!this.firstCardId || !this.secondCardId) return false;
+    console.log(this.cards[this.firstCardId].symbol, this.cards[this.secondCardId].symbol)
+    return this.cards[this.firstCardId].symbol === this.cards[+this.secondCardId].symbol;
+  }
 
+  _openCard(cardId: string): void {
+    const cardElement: HTMLElement = document.getElementById(cardId);
+    cardElement.classList.add('flip');
+  };
 
-  
+  _closeCard(cardId: string): void {
+    const cardElement: HTMLElement = document.getElementById(cardId);
+    cardElement.classList.remove('flip');
+  };
 
+  _turnCard(cardId: string) {
+    console.log(this.flipCard)
+    if (!cardId) return false;
+    if (this.flipCard < 2) {
+      this._openCard(cardId);
+      this.flipCard++;
+    }
+    this.updateGame();
 
-}
+  }
+
+};
 
 new Game();
 
