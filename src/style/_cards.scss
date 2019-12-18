@@ -1,7 +1,8 @@
 .cards {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  perspective: 1000px;
 }
 
 .card {
@@ -14,7 +15,8 @@
   cursor: pointer;
   transform: rotateX(180deg);
   position: relative;
-  perspective: 1000;
+  flex-basis: 20%;
+  perspective: 1000px;
   &.flip {
     .front {
       transform: rotateY(360deg);
