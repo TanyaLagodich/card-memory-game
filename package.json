@@ -6,8 +6,8 @@
   "author": "TanyaLagodich",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack"
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack production"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
@@ -31,6 +31,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2"
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "bootstrap": "^4.4.1"
   }
 }

@@ -1,30 +1,16 @@
 import { Card } from './_typings/entity';
 
-const cards: Array<Card> = [
-  {symbol: 'fa-cat'},
-  {symbol: 'fa-cat'},
-  {symbol: 'fa-crow'},
-  {symbol: 'fa-crow'},
-  {symbol: 'fa-dog'},
-  {symbol: 'fa-dog'},
-  {symbol: 'fa-dove'},
-  {symbol: 'fa-dove'},
-  {symbol: 'fa-dragon'},
-  {symbol: 'fa-dragon'},
-  {symbol: 'fa-fish'},
-  {symbol: 'fa-fish'}
-];
-
-class CardDeck {
+export default class CardDeck {
   cards: Array<Card>;
 
   constructor(cards: Array<Card>) {
     this.cards = cards;
   }
 
-  isMatched() {
-    
-  };
+  // isMatched(firstCardId: Number, secondCardId: Number): boolean {
+  //   if (!firstCardId || !secondCardId) return false;
+  //   return this.cards[firstCardId].symbol === this.cards[secondCardId].symbol;
+  // };
 
   shuffleDeck() {
     let copyCardsDeck = this.cards;
@@ -42,5 +28,3 @@ class CardDeck {
     return copyCardsDeck;
   }
 }
-
-export default new CardDeck(cards);

@@ -1,21 +1,37 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+@import "header";
 @import "cards";
 
 html {
   height: 100%;
+  font-size: 16px;
 }
 
 body {
+  padding: 4rem 0;
   overflow-x: hidden;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .container {
   margin: 0 auto;
-  padding: 0 16px;
-  max-width: 1344px;
+  padding: 0 1rem;
+  max-width: 84rem;
   width: 100%;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1rem;
 }
