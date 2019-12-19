@@ -3,9 +3,9 @@ import { Card } from './_typings/entity';
 export default class CardGame {
   deck: Array<Card>;
   ui: any;
-  timerGame: number | null = 0;
-  timerMinutes: number = 0;
-  timerSeconds: number = 0;
+  flipCard: number = 0;
+  firstCardId: number;
+  secondCardId: number;
 
   constructor() {
     this.deck = null;
@@ -17,30 +17,13 @@ export default class CardGame {
     this.ui = ui;
 
     ui.createCards(this.deck);
-    this.startTimer();
+    this.ui.startTimer();
   }
 
-  startTimer(): void {
-    this.stopTimerGame();
-    this.timerGame = window.setInterval(() => this.updateTimerGame(), 1000)
-  }
-
-  stopTimerGame() {
-    const timerElement: HTMLElement = document.querySelector('.js-timer-game');
-    clearInterval(this.timerGame);
-    timerElement.innerHTML = '00:00:00';
-  }
-  
-  updateTimerGame(): any {
-    const timerElement: HTMLElement = document.querySelector('.js-timer-game');
-    if (this.timerSeconds >= 59) {
-      this.timerMinutes++;
-      this.timerSeconds = 0;
-    } else {
-      this.timerSeconds++;
+  updateGame(): void {
+    if (this.flipCard === 2) {
+      const res = this.deck.isMatched(this.firstCardId, this.secondCardId);
     }
-
-    timerElement.innerHTML = '00:' + this.timerMinutes + ':' + this.timerSeconds;
-  }
+  };
   
 }

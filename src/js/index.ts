@@ -31,6 +31,6 @@ const cardsWrapper: HTMLDivElement = document.querySelector('.cards');
 cardsWrapper.addEventListener('click', ({ target }) => {
   const card: Element = (<HTMLElement>target).classList.contains('card') ? <HTMLElement>target : (<HTMLElement>target).closest('.card');
   if (card) {
-    cardUI._turnCard(card.getAttribute('id'));
+    cardUI.turnCard(card.getAttribute('id'));
   }
 })

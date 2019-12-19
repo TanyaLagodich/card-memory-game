@@ -7,10 +7,10 @@ export default class CardDeck {
     this.cards = cards;
   }
 
-  // isMatched(firstCardId: Number, secondCardId: Number): boolean {
-  //   if (!firstCardId || !secondCardId) return false;
-  //   return this.cards[firstCardId].symbol === this.cards[secondCardId].symbol;
-  // };
+  isMatched(firstCardId: any, secondCardId: any): boolean {
+    if (!firstCardId || !secondCardId) return false;
+    return this.cards[firstCardId].symbol === this.cards[secondCardId].symbol;
+  };
 
   shuffleDeck() {
     let copyCardsDeck = this.cards;
