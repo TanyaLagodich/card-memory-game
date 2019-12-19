@@ -1,7 +1,7 @@
 import { Card } from './_typings/entity';
 
 export default class CardGame {
-  deck: Array<Card>;
+  deck: any;
   ui: any;
   flipCard: number = 0;
   firstCardId: number;
@@ -13,17 +13,31 @@ export default class CardGame {
   }
 
   startNewGame(deck: any, ui: any) {
-    this.deck = deck.shuffleDeck();
+    this.deck = deck;
     this.ui = ui;
 
-    ui.createCards(this.deck);
-    this.ui.startTimer();
+    ui.createCards(this.deck.shuffleDeck());
   }
 
-  updateGame(): void {
-    if (this.flipCard === 2) {
-      const res = this.deck.isMatched(this.firstCardId, this.secondCardId);
+  turnCard(cardId: string) {
+    console.log(this.flipCard)
+    if (!cardId) return false;
+    if (this.flipCard > 1) return false;
+    this.ui.openCard(cardId);
+    this.flipCard += 1;
+    if (this.flipCard === 1) {
+      this.firstCardId = +cardId;
+    } else {
+      if (this.deck.isMatched(this.firstCardId, cardId)) {
+        this.ui.animateMacthedCards(this.firstCardId, cardId);
+      } else {
+        this.ui.closeCard(this.firstCardId);
+        this.ui.closeCard(cardId);
+      }
+      this.flipCard = 0;
+      this.firstCardId = null;
     }
-  };
+
+  }
   
 }

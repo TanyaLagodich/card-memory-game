@@ -6,7 +6,7 @@ export default class Game {
   timerGame: number | null = 0;
   timerMinutes: number = 0;
   timerSeconds: number = 0;
-  
+
   createCards(cards: Array<Card>): void {
     const wrapper: HTMLElement = document.querySelector('.cards');
     wrapper.innerHTML = cards.map((card, cardIndex) => {
@@ -53,14 +53,9 @@ export default class Game {
     cardElement.classList.remove('flip');
   };
 
-  turnCard(cardId: string) {
-    if (!cardId) return false;
-    if (this.flipCard < 2) {
-      this.openCard(cardId);
-      this.flipCard++;
-    }
-    // this.updateGame();
-
+  animateMacthedCards(firstCardId: number, secondCardId: number) {
+    const firstCard = document.querySelector(`${firstCardId}`);
+    const secondCard = document.querySelector(`${secondCardId}`);
   }
 
 };
